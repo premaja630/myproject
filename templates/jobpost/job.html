@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}<br>
+
+   
+    <div class="content">
+        <div class="jumbotron">
+            <div class="row">
+                <form action="" align="center" method="POST">
+                    <div class="col-md-8" >
+                        <div class="card card-body">
+                            {% if register %}
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16" align="center">
+                                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" style="color: blue;"/>
+                                    </svg>
+                                    <h1 align="center">Application submitted successfully</h1>
+                                   {% else %} 
+                                              <h1 style="color: rgb(146, 172, 0);">Title : {{ detailes.Titel }}</h1>
+                                              <p style="color: blue;">company : {{ detailes.company }}</p> 
+                                              <form action="{% url 'apply' %}" method="POST" align="center">
+                                                  {% csrf_token %}
+                                                  {{ form.as_p }}
+                                                  <input type="submit" value="submit">
+                                              </form>
+                            {% endif %}    
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   
+{% endblock %}
