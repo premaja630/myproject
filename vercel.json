@@ -1,13 +1,29 @@
+
 {
-    "builds": [{
-        "src": "djangoprojectname/wsgi.py",
-        "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
-    }],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "djangoprojectname/wsgi.py"
-        }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "<projectname>/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.11.7" }
+    },
+    {
+      "src": "build_files.sh",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "ui/staticfiles"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "<myproject>/wsgi.py"
+    }
+  ],
+  "outputDirectory": "ui/staticfiles"
 }
